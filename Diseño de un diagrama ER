@@ -1,0 +1,52 @@
+Table "Cliente" {
+  "IDCliente" INT [pk]
+  "Nombre" VARCHAR
+  "Direccion" VARCHAR
+  "CorreoElectronico" VARCHAR
+}
+
+Table "Producto" {
+  "IDProducto" INT [pk]
+  "Nombre" VARCHAR 
+  "Precio" DECIMAL
+  "Descripcion" TEXT
+  "Categoria_ID" INT
+  "Proveedor_ID" INT
+}
+
+Table "Orden" {
+  "IDOrden" INT [pk]
+  "FechaOrden" TIMESTAMP
+  "Cliente_ID" INT
+}
+
+Table "Categoria" {
+  "IDCategoria" INT [pk]
+  "Nombre" VARCHAR
+}
+
+Table "Proveedor" {
+  "IDProveedor" INT [pk]
+  "Nombre" VARCHAR
+  "Direccion" VARCHAR
+  "CorreoElectronico" VARCHAR
+}
+
+Table "Resena" {
+  "IDResena" INT [pk]
+  "Cliente_ID" INT
+  "Producto_ID" INT
+  "Puntuacion" INT
+  "Comentario" TEXT
+}
+ 
+
+Ref: "Categoria"."IDCategoria" < "Producto"."Categoria_ID"
+
+Ref: "Proveedor"."IDProveedor" < "Producto"."Proveedor_ID"
+
+Ref: "Cliente"."IDCliente" < "Orden"."Cliente_ID"
+
+Ref: "Producto"."IDProducto" < "Resena"."Producto_ID"
+
+Ref: "Cliente"."IDCliente" < "Resena"."Cliente_ID"
